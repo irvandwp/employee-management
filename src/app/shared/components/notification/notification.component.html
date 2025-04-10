@@ -1,0 +1,8 @@
+@if (notification$ | async; as notification) {
+  <div class="notification" [class]="'notification-' + notification.type">
+    <span class="notification-message">{{ notification.message }}</span>
+    <button (click)="onClose()" class="notification-close">
+      &times;
+    </button>
+  </div>
+}

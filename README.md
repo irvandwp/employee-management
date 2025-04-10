@@ -1,28 +1,41 @@
-# EmployeeManagement
+## Overview
+This is an Employee Management System built with Angular 17 and Tailwind CSS. The application provides a responsive web interface for managing employee data with features like authentication, employee listing with pagination/sorting/searching, adding new employees, and viewing employee details.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+## Features
+# Login Page 
+authentication with username and password (admin & admin123)
 
-## Development server
+# Employee List Page:
+* Displays 100+ dummy employee records
+* Pagination with customizable page sizes
+* Sorting by column headers
+* Advanced search functionality (AND condition across multiple fields)
+* Action buttons for edit/delete with toast notifications
+* Add new employee button
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Add Employee Page:
+* Form validation for all required fields
+* Date picker for birth date (with max date validation)
+* Email format validation
+* Numeric validation for basic salary
+* Searchable dropdown for employee groups
 
-## Code scaffolding
+## Employee Detail Page:
+* Detailed employee information display
+* Preserves previous search state when returning to list
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technical Stack
+* Angular 17
+* Tailwind CSS for styling
+* Angular Router for navigation
+* Reactive Forms for form handling
 
-## Build
+## Installation
+1. run npm install in terminal
+2. run ng serve
+3. Open your browser and navigate to http://localhost:4200
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# employee-management
+## Development Notes
+The application uses a mock authentication system with hardcoded credentials (check the auth service for details)
+Employee data is generated in-memory using the employee service
+The UI is fully responsive and works on mobile, tablet, and desktop screens

@@ -1,0 +1,219 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white shadow rounded-lg">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h2 class="text-xl font-bold text-gray-900">Add New Employee</h2>
+    </div>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="px-6 py-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Username -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">
+            Username <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('username')?.invalid && employeeForm.get('username')?.touched"
+          >
+          @if (employeeForm.get('username')?.invalid && employeeForm.get('username')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (employeeForm.get('username')?.errors?.['required']) {
+                <div>Username is required</div>
+              }
+              @if (employeeForm.get('username')?.errors?.['minlength']) {
+                <div>Username must be at least 3 characters</div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- First Name -->
+        <div>
+          <label for="firstName" class="block text-sm font-medium text-gray-700">
+            First Name <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched"
+          >
+          @if (employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched) {
+            <div class="text-red-500 text-sm mt-1">First name is required</div>
+          }
+        </div>
+
+        <!-- Last Name -->
+        <div>
+          <label for="lastName" class="block text-sm font-medium text-gray-700">
+            Last Name <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched"
+          >
+          @if (employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched) {
+            <div class="text-red-500 text-sm mt-1">Last name is required</div>
+          }
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched"
+          >
+          @if (employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (employeeForm.get('email')?.errors?.['required']) {
+                <div>Email is required</div>
+              }
+              @if (employeeForm.get('email')?.errors?.['email']) {
+                <div>Please enter a valid email</div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Birth Date -->
+        <div>
+          <label for="birthDate" class="block text-sm font-medium text-gray-700">
+            Birth Date <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="birthDate"
+            type="date"
+            formControlName="birthDate"
+            [max]="maxDate"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('birthDate')?.invalid && employeeForm.get('birthDate')?.touched"
+            (click)="openDatePicker($event)"
+          >
+          @if (employeeForm.get('birthDate')?.invalid && employeeForm.get('birthDate')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (employeeForm.get('birthDate')?.errors?.['required']) {
+                <div>Birth date is required</div>
+              }
+              @if (employeeForm.get('birthDate')?.errors?.['futureDate']) {
+                <div>Birth date cannot be in the future</div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Basic Salary -->
+        <div>
+          <label for="basicSalary" class="block text-sm font-medium text-gray-700">
+            Basic Salary <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="basicSalary"
+            type="number"
+            formControlName="basicSalary"
+            min="0"
+            step="0.01"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            [class.border-red-500]="employeeForm.get('basicSalary')?.invalid && employeeForm.get('basicSalary')?.touched"
+          >
+          @if (employeeForm.get('basicSalary')?.invalid && employeeForm.get('basicSalary')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              @if (employeeForm.get('basicSalary')?.errors?.['required']) {
+                <div>Salary is required</div>
+              }
+              @if (employeeForm.get('basicSalary')?.errors?.['min']) {
+                <div>Salary must be positive</div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Status -->
+        <div>
+          <label for="status" class="block text-sm font-medium text-gray-700">
+            Status <span class="text-red-500">*</span>
+          </label>
+          <select
+            id="status"
+            formControlName="status"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+            <option value="On Leave">On Leave</option>
+          </select>
+        </div>
+
+        <!-- Group -->
+        <div class="relative">
+          <label for="groupSearch" class="block text-sm font-medium text-gray-700">
+            Group <span class="text-red-500">*</span>
+          </label>
+          <input
+            id="groupSearch"
+            #groupSearchInput
+            type="text"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search department..."
+            (input)="filterGroups($event)"
+            (focus)="showGroupDropdown = true"
+            (blur)="hideGroup()"
+            [value]="employeeForm.get('group')?.value"
+          >
+          <input type="hidden" formControlName="group">
+
+          @if (showGroupDropdown) {
+            <div class="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+              @for (group of filteredGroups; track group) {
+                <div
+                  class="px-4 py-2 hover:bg-blue-50 cursor-pointer"
+                  (mousedown)="selectGroup(group)"
+                >
+                  {{ group }}
+                </div>
+              }
+              @if (filteredGroups.length === 0) {
+                <div class="px-4 py-2 text-gray-500">No Group found</div>
+              }
+            </div>
+          }
+
+          @if (employeeForm.get('group')?.invalid && employeeForm.get('group')?.touched) {
+            <div class="text-red-500 text-sm mt-1">Group is required</div>
+          }
+        </div>
+      </div>
+
+      <div class="mt-6 flex justify-end gap-3">
+        <app-button
+          type="button"
+          variant="secondary"
+          size="md"
+          (click)="onCancel()"
+        >
+          Cancel
+        </app-button>
+        <app-button
+          type="submit"
+          variant="primary"
+          size="md"
+          [disabled]="employeeForm.invalid"
+        >
+          Save
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>

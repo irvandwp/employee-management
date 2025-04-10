@@ -1,0 +1,56 @@
+<div class="min-h-screen flex items-center justify-center">
+  <div class="card p-8 w-full max-w-md">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Employee Management</h1>
+    <h2 class="text-xl text-center text-gray-700 mb-8">Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          class="input-field"
+          [class.input-field-error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+
+          @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              Username is required
+            </div>
+          }
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="input-field"
+          [class.input-field-error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+
+          @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+            <div class="text-red-500 text-sm mt-1">
+              Password is required
+            </div>
+          }
+      </div>
+
+      @if (errorMessage) {
+        <div class="text-red-500 text-sm text-center">{{ errorMessage }}</div>
+      }
+
+      <div>
+        <app-button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          variant="primary"
+          size="lg"
+          class="w-full justify-center"
+          [fullWidth]="true">
+          Login
+        </app-button>
+      </div>
+    </form>
+  </div>
+</div>

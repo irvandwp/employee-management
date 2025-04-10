@@ -1,0 +1,13 @@
+<button
+  [type]="type"
+  [disabled]="disabled"
+  [class]="buttonClasses"
+  (click)="onClick.emit()"
+>
+  @if (icon) {
+    <span class="btn-icon" [innerHTML]="icon"></span>
+  }
+  <span class="btn-content">
+    <ng-content></ng-content>
+  </span>
+</button>
